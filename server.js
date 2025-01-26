@@ -14,14 +14,7 @@ app.use(function(req, res, next) {
 // Use environment variables for database URL
 const dbUri = process.env.DB_URI;
 
-mongoose.connect(dbUri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-}).then(() => {
-  console.log('Connected to MongoDB Atlas');
-}).catch((error) => {
-  console.error('Error connecting to MongoDB Atlas:', error);
-});
+mongoose.connect(dbUri);
 
 const flowerSchema = new mongoose.Schema({
   flowername: String,
@@ -57,7 +50,7 @@ app.get('/flowers', async (req, res) => {
   }
 });
 
-app.get('/naver-shopping', async (req, res) => {
+app.get('/naverShopping', async (req, res) => {
   const flowername = req.query.flowername;
 
   if (!flowername) {
