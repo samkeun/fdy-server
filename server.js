@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const app = express();
 const port = process.env.PORT || 5000;
 
+
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
@@ -11,10 +12,16 @@ app.use(function(req, res, next) {
   next();
 });
 
-// Use environment variables for database URL
-const dbUri = process.env.DB_URI;
+const dbUrl = 'mongodb+srv://myatlasdbuser:abcd4321@cluster0.zrw6v.mongodb.net/';
 
-mongoose.connect(dbUri);
+mongoose.connect(dbUrl, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+}).then(() => {
+  console.log('Connected to MongoDB Atlas');
+}).catch((error) => {
+  console.error('Error connecting to MongoDB Atlas:', error);
+});
 
 const flowerSchema = new mongoose.Schema({
   flowername: String,
@@ -58,9 +65,8 @@ app.get('/naver-shopping', async (req, res) => {
     return;
   }
 
-  // Use environment variables for Naver API credentials
-  const clientId = process.env.CLIENT_ID;
-  const clientSecret = process.env.CLIENT_SECRET;
+  const clientId = 'o6CzqeMjPF1XQLhQA2Ku';
+  const clientSecret = 'DNyjBmZyRB';
   const displayPerPage = 100; 
   const maxResults = 1000; 
 
