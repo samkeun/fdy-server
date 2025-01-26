@@ -4,8 +4,8 @@ const mongoose = require('mongoose');
 const app = express();
 const port = process.env.PORT || 5000;
 
-const cors = require('cors');
-app.use(cors());
+// const cors = require('cors');
+// app.use(cors());
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -53,7 +53,7 @@ app.get('/flowers', async (req, res) => {
   }
 });
 
-app.get('/naverShopping', async (req, res) => {
+app.get('/naver-shopping', async (req, res) => {
   const flowername = req.query.flowername;
 
   if (!flowername) {
